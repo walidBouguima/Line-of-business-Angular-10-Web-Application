@@ -26,6 +26,6 @@ export interface IAuthService {
   getToken(): string
 }
 @Injectable()
-export class AuthService {
+export abstract class AuthService {
   constructor() {}
 }
