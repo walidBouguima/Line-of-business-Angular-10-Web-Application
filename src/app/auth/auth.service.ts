@@ -67,7 +67,7 @@ export abstract class AuthService implements IAuthService {
   }
 
   logout(clearToken?: boolean): void {
-    throw new Error('Not yet implemented')
+    setTimeout(() => this.authStatus$.next(defaultAuthStatus), 0)
   }
   getToken(): string {
     throw new Error('Not yet implemented')
