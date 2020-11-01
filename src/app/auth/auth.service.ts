@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable } from 'rxjs'
+import * as decode from 'jwt-decode'
+import { BehaviorSubject, Observable, throwError } from 'rxjs'
+import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
 
+import { transformError } from '../common/common'
 import { IUser, User } from '../user/user'
 import { Role } from './auth.enum'
 
@@ -42,8 +45,27 @@ export abstract class AuthService implements IAuthService {
   protected abstract getCurrentUser(): Observable<User>
 
   login(email: string, password: string): Observable<void> {
-    throw new Error('Not yet implemented')
+    const loginResponse$ = this.authProvider(email, password).pipe(
+      map((value) => {
+        const token = decode(value.accessToken)
+        return this.transformJwtToken(token)
+      }),
+      tap((status) => this.authStatus$.next(status)),
+      filter((status: IAuthStatus) => status.isAuthenticated),
+      // tslint:disable-next-line: deprecation
+      flatMap(() => this.getCurrentUser()),
+      map((user) => this.currentUser$.next(user)),
+      catchError(transformError)
+    )
+    loginResponse$.subscribe({
+      error: (err) => {
+        this.logout()
+        return throwError(err)
+      },
+    })
+    return loginResponse$
   }
+
   logout(clearToken?: boolean): void {
     throw new Error('Not yet implemented')
   }
