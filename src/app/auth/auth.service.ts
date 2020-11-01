@@ -25,12 +25,21 @@ export interface IAuthService {
   logout(clearToken?: boolean): void
   getToken(): string
 }
+
 @Injectable()
 export abstract class AuthService implements IAuthService {
+  constructor() {}
+
   readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
   readonly currentUser$ = new BehaviorSubject<IUser>(new User())
 
-  constructor() {}
+  // Abstract protected methods that will not be available publically but inhereted by the derived classes to implement the auth workflow
+  protected abstract authProvider(
+    email: string,
+    password: string
+  ): Observable<IServerAuthResponse>
+  protected abstract transformJwtToken(token: unknown): IAuthStatus
+  protected abstract getCurrentUser(): Observable<User>
 
   login(email: string, password: string): Observable<void> {
     throw new Error('Not yet implemented')
