@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import * as decode from 'jwt-decode'
-import { BehaviorSubject, Observable, throwError } from 'rxjs'
+import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
 import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
 
 import { transformError } from '../common/common'
@@ -32,13 +32,30 @@ export interface IAuthService {
 
 @Injectable()
 export abstract class AuthService extends CacheService implements IAuthService {
+  private getAndUpdateUserIfAuthenticated = pipe(
+    filter((status: IAuthStatus) => status.isAuthenticated),
+    // tslint:disable-next-line: deprecation
+    flatMap(() => this.getCurrentUser()),
+    map((user) => this.currentUser$.next(user)),
+    catchError(transformError)
+  )
   constructor() {
     super()
+    if (this.hasExpiredToken()) {
+      this.logout(true)
+    } else {
+      this.authStatus$.next(this.getAuthStatusFromToken())
+      // To load user on browser refresh, resume pipline must activate on the next cycle which
+      // allows for all services to be constructed properly
+      setTimeout(() => this.resumeCurrentUser$.subscribe(), 0)
+    }
   }
 
   readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
   readonly currentUser$ = new BehaviorSubject<IUser>(new User())
-
+  protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
+    this.getAndUpdateUserIfAuthenticated
+  )
   // Abstract protected methods that will not be available publically but inhereted by the derived classes to implement the auth workflow
   protected abstract authProvider(
     email: string,
@@ -56,11 +73,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
         return this.transformJwtToken(token)
       }),
       tap((status) => this.authStatus$.next(status)),
-      filter((status: IAuthStatus) => status.isAuthenticated),
-      // tslint:disable-next-line: deprecation
-      flatMap(() => this.getCurrentUser()),
-      map((user) => this.currentUser$.next(user)),
-      catchError(transformError)
+      this.getAndUpdateUserIfAuthenticated
     )
     loginResponse$.subscribe({
       error: (err) => {
@@ -77,13 +90,28 @@ export abstract class AuthService extends CacheService implements IAuthService {
     }
     setTimeout(() => this.authStatus$.next(defaultAuthStatus), 0)
   }
+  // tslint:disable-next-line: typedef
   protected setToken(jwt: string) {
     this.setItem('jwt', jwt)
   }
   getToken(): string {
     return this.getItem('jwt') ?? ''
   }
+  // tslint:disable-next-line: typedef
   protected clearToken() {
     this.removeItem('jwt')
+  }
+  protected hasExpiredToken(): boolean {
+    const jwt = this.getToken()
+
+    if (jwt) {
+      // tslint:disable-next-line: no-any
+      const payload = decode(jwt) as any
+      return Date.now() >= payload.exp * 1000
+    }
+    return true
+  }
+  protected getAuthStatusFromToken(): IAuthStatus {
+    return this.transformJwtToken(decode(this.getToken()))
   }
 }
