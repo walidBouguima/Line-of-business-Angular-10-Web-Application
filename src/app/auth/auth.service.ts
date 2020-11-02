@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import * as decode from 'jwt-decode'
+import * as jwt_decode from 'jwt-decode'
 import { BehaviorSubject, Observable, pipe, throwError } from 'rxjs'
 import { catchError, filter, flatMap, map, tap } from 'rxjs/operators'
 
@@ -8,55 +8,30 @@ import { IUser, User } from '../user/user'
 import { Role } from './auth.enum'
 import { CacheService } from './cache.service'
 
-export interface IAuthStatus {
-  isAuthenticated: boolean
-  userRole: Role
-  userId: string
-}
-export interface IServerAuthResponse {
-  accessToken: string
-}
-
-export const defaultAuthStatus: IAuthStatus = {
-  isAuthenticated: false,
-  userRole: Role.None,
-  userId: '',
-}
-export interface IAuthService {
-  readonly authStatus$: BehaviorSubject<IAuthStatus>
-  readonly currentUser$: BehaviorSubject<IUser>
-  login(email: string, password: string): Observable<void>
-  logout(clearToken?: boolean): void
-  getToken(): string
-}
-
 @Injectable()
 export abstract class AuthService extends CacheService implements IAuthService {
-  private getAndUpdateUserIfAuthenticated = pipe(
-    filter((status: IAuthStatus) => status.isAuthenticated),
-    // tslint:disable-next-line: deprecation
-    flatMap(() => this.getCurrentUser()),
-    map((user) => this.currentUser$.next(user)),
-    catchError(transformError)
-  )
   constructor() {
     super()
     if (this.hasExpiredToken()) {
       this.logout(true)
     } else {
       this.authStatus$.next(this.getAuthStatusFromToken())
-      // To load user on browser refresh, resume pipline must activate on the next cycle which
-      // allows for all services to be constructed properly
       setTimeout(() => this.resumeCurrentUser$.subscribe(), 0)
     }
   }
-
+  private getAndUpdateUserIfAuthenticated = pipe(
+    filter((status: IAuthStatus) => status.isAuthenticated),
+    // tslint:disable-next-line: deprecation
+    flatMap(() => this.getCurrentUser()),
+    map((user: IUser) => this.currentUser$.next(user)),
+    catchError(transformError)
+  )
   readonly authStatus$ = new BehaviorSubject<IAuthStatus>(defaultAuthStatus)
-  readonly currentUser$ = new BehaviorSubject<IUser>(new User())
+  currentUser$ = new BehaviorSubject<IUser>(new User())
+  // resume current user
   protected readonly resumeCurrentUser$ = this.authStatus$.pipe(
     this.getAndUpdateUserIfAuthenticated
   )
-  // Abstract protected methods that will not be available publically but inhereted by the derived classes to implement the auth workflow
   protected abstract authProvider(
     email: string,
     password: string
@@ -66,11 +41,14 @@ export abstract class AuthService extends CacheService implements IAuthService {
 
   login(email: string, password: string): Observable<void> {
     this.clearToken()
+
     const loginResponse$ = this.authProvider(email, password).pipe(
       map((value) => {
         this.setToken(value.accessToken)
-        const token = decode(value.accessToken)
-        return this.transformJwtToken(token)
+
+        // const token = decode(value.accessToken)
+        // return this.transformJwtToken(token)
+        return this.getAuthStatusFromToken()
       }),
       tap((status) => this.authStatus$.next(status)),
       this.getAndUpdateUserIfAuthenticated
@@ -88,7 +66,9 @@ export abstract class AuthService extends CacheService implements IAuthService {
     if (clearToken) {
       this.clearToken()
     }
-    setTimeout(() => this.authStatus$.next(defaultAuthStatus), 0)
+    setTimeout(() => {
+      this.authStatus$.next(defaultAuthStatus)
+    }, 0)
   }
   // tslint:disable-next-line: typedef
   protected setToken(jwt: string) {
@@ -103,15 +83,37 @@ export abstract class AuthService extends CacheService implements IAuthService {
   }
   protected hasExpiredToken(): boolean {
     const jwt = this.getToken()
-
     if (jwt) {
       // tslint:disable-next-line: no-any
-      const payload = decode(jwt) as any
+      const payload = jwt_decode(jwt) as any
       return Date.now() >= payload.exp * 1000
     }
     return true
   }
   protected getAuthStatusFromToken(): IAuthStatus {
-    return this.transformJwtToken(decode(this.getToken()))
+    return this.transformJwtToken(jwt_decode(this.getToken()))
   }
+}
+
+export interface IAuthStatus {
+  isAuthenticated: boolean
+  userRole: Role
+  userId: string
+}
+export interface IServerAuthResponse {
+  accessToken: string
+}
+
+export const defaultAuthStatus: IAuthStatus = {
+  isAuthenticated: false,
+  userRole: Role.None,
+  userId: '',
+}
+
+export interface IAuthService {
+  readonly authStatus$: BehaviorSubject<IAuthStatus>
+  readonly currentUser$: BehaviorSubject<IUser>
+  login(email: string, password: string): Observable<void>
+  logout(clearToken?: boolean): void
+  getToken(): string
 }
