@@ -1,5 +1,6 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <span class="mat-display-2">What's up</span>
-  <button mat-raised-button color="primary" (click)="login()">Login as a
-    manager</button>
+<div *ngIf="displayLogin">
+  <app-login></app-login>
+</div>
+<div *ngIf="!displayLogin">
+  <span class="mat-display-3">You get a lemon, you get a lemon, you get a lemon</span>
 </div>

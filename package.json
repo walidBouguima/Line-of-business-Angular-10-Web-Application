@@ -34,6 +34,7 @@
     "fake-jwt-sign": "^1.1.1",
     "jwt-decode": "^2.2.0",
     "rxjs": "~6.6.0",
+    "subsink": "^1.0.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
