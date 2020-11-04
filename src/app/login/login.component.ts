@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe()
   }
+  // tslint:disable-next-line: typedef
   private homeRoutePerRole(role: Role) {
     switch (role) {
       case Role.Cashier:
