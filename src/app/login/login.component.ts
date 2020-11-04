@@ -47,12 +47,10 @@ export class LoginComponent implements OnInit {
   // tslint:disable-next-line: typedef
   buildLoginForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       password: [
         '',
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(50),
+        [Validators.required, Validators.minLength(8), Validators.maxLength(50)],
       ],
     })
   }

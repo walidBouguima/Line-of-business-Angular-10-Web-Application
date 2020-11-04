@@ -1,4 +1,5 @@
-<mat-toolbar color="primary" fxLayoutGap="8px">
+<mat-toolbar color="primary" fxLayoutGap="8px"
+  *ngIf="{status: authService.authStatus$ | async, user: authService.currentUser$ | async} as auth;">
   <button mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
@@ -7,12 +8,12 @@
     <span class="mat-h2">Limoni</span>
   </a>
   <span class="flex-spacer"></span>
-  <button mat-icon-button mat-mini-fab routerLink="/user/profile" matTooltip="Profile"
-    aria-label="User Profile">
+  <button *ngIf="auth?.status?.isAuthenticated" mat-icon-button mat-mini-fab
+    routerLink="/user/profile" matTooltip="Profile" aria-label="User Profile">
     <mat-icon>account_circle</mat-icon>
   </button>
-  <button mat-icon-button mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
-    aria-label="Logout">
+  <button *ngIf="auth?.status?.isAuthenticated" mat-icon-button mat-mini-fab
+    routerLink="/user/logout" matTooltip="Logout" aria-label="Logout">
     <mat-icon>lock_open</mat-icon>
   </button>
 </mat-toolbar>

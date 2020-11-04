@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { combineLatest } from 'rxjs'
 
 import { AuthService } from '../auth/auth.service'
 
@@ -10,7 +9,7 @@ import { AuthService } from '../auth/auth.service'
 })
 export class HomeComponent implements OnInit {
   displayLogin = true
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {}
 }
