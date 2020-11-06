@@ -1,13 +1,15 @@
 <div class="app-container">
-  <mat-toolbar color="primary" fxLayoutGap="8px" class="app-toolbar"
-    [class.app-is-mobile]="media.isActive('xs')"
-    *ngIf="{status: authService.authStatus$ | async, user: authService.currentUser$ | async} as auth;">
-    <button mat-icon-button (click)="sidenav.toggle()">
+  <mat-toolbar *ngIf="{
+      status: authService.authStatus$ | async,
+      user: authService.currentUser$ | async
+    } as auth" color="primary" fxLayoutGap="8px" class="app-toolbar"
+    [class.app-is-mobile]="media.isActive('xs')">
+    <button mat-icon-button *ngIf="auth?.status?.isAuthenticated" mat-icon-button
+      (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <a mat-icon-button routerLink="/home">
-      <mat-icon svgIcon="lime"></mat-icon>
-      <span class="mat-h2">Limoni</span>
+    <a mat-button routerLink="/home">
+      <mat-icon svgIcon="lemon"></mat-icon><span class="mat-h2">LemonMart</span>
     </a>
     <span class="flex-spacer"></span>
     <button *ngIf="auth?.status?.isAuthenticated" mat-mini-fab routerLink="/user/profile"
@@ -16,9 +18,8 @@
         [src]="auth?.user?.picture" />
       <mat-icon *ngIf="!auth?.user?.picture">account_circle</mat-icon>
     </button>
-
-    <button *ngIf="auth?.status?.isAuthenticated" mat-icon-button mat-mini-fab
-      routerLink="/user/logout" matTooltip="Logout" aria-label="Logout">
+    <button mat-mini-fab routerLink="/user/logout" matTooltip="Logout"
+      aria-label="Logout">
       <mat-icon>lock_open</mat-icon>
     </button>
   </mat-toolbar>
@@ -27,7 +28,6 @@
       [fixedInViewport]="media.isActive('xs')" fixedTopGap="56" [(opened)]="opened">
       <app-navigation-menu></app-navigation-menu>
     </mat-sidenav>
-
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
