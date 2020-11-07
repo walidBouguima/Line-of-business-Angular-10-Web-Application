@@ -13,9 +13,11 @@ export class InMemoryAuthService extends AuthService {
   }
   private defaultUser = User.Build({
     _id: '5da01751da27cc462d265913',
-    email: 'duluca@gmail.com',
-    name: { first: 'Doguhan', last: 'Uluca' },
-    picture: 'https://secure.gravatar.com/avatar/7cbaa9afb5ca78d97f3c689f8ce6c985',
+    email: 'walid.bouguima@gmail.com.com',
+    name: { first: 'Walid', last: 'Bouguima' },
+    // picture: 'https://secure.gravatar.com/avatar/7cbaa9afb5ca78d97f3c689f8ce6c985',
+    picture:
+      'https://fr.gravatar.com/userimage/191438978/92ec935bf3f59299942f95a3ab446337',
     role: Role.Manager,
     dateOfBirth: new Date(1980, 1, 1),
     userStatus: true,
@@ -39,7 +41,7 @@ export class InMemoryAuthService extends AuthService {
     password: string
   ): Observable<IServerAuthResponse> {
     email = email.toLocaleLowerCase()
-    if (!email.endsWith('@test.com')) {
+    if (!email.endsWith('@bouguima.com')) {
       return throwError('Failed to login! Email needs to end with @test.com !')
     }
     const authStatus = {
