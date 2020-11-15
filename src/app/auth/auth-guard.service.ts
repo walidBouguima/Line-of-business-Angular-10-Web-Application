@@ -60,12 +60,14 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
       take(1) // complete the observable for the guard to work
     )
   }
+  // tslint:disable-next-line: typedef
   private checkRoleMatch(role: Role, route?: ActivatedRouteSnapshot) {
     if (!route?.data?.expectedRole) {
       return true
     }
     return role === route.data.expectedRole
   }
+  // tslint:disable-next-line: typedef
   private showAlert(isAuth: boolean, roleMatch: boolean) {
     if (!isAuth) {
       this.uiService.showToast('You must login to continue')
