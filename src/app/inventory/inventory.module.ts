@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgxPaginationModule } from 'ngx-pagination'
 
 import { MaterialModule } from '../material.module'
 import { CategoriesComponent } from './categories/categories.component'
@@ -17,6 +19,13 @@ import { StockEntryComponent } from './stock-entry/stock-entry.component'
     ProductsComponent,
     CategoriesComponent,
   ],
-  imports: [CommonModule, InventoryRoutingModule, MaterialModule],
+  imports: [
+    CommonModule,
+    InventoryRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxPaginationModule,
+  ],
 })
 export class InventoryModule {}
