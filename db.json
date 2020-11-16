@@ -1,0 +1,160 @@
+{
+  "products": [
+    {
+      "name": "Whole wheat bread",
+      "category": "bread",
+      "price": "2",
+      "imageUrl": "https://images.pexels.com/photos/1586947/pexels-photo-1586947.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "id": 3
+    },
+    {
+      "name": "Multigrain bread",
+      "category": "bread",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1572214649933-125dae38a8d8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 4
+    },
+    {
+      "id": 7,
+      "name": "Yellow sprouts pulses",
+      "category": "pulses and beans",
+      "price": "1",
+      "imageUrl": "https://images.unsplash.com/photo-1600190909161-44abaa7d45f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+    },
+    {
+      "name": "Cucumber",
+      "category": "vegetables",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 10
+    },
+    {
+      "name": "Papaya",
+      "category": "fruits",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 12
+    },
+    {
+      "name": "Apple",
+      "category": "fruits",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1579613832125-5d34a13ffe2a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 13
+    },
+    {
+      "name": "Avocado",
+      "category": "fruits",
+      "price": "3",
+      "imageUrl": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 14
+    },
+    {
+      "name": "Bread Cake",
+      "category": "bread",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1600025112579-589118a8d7ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 15
+    },
+    {
+      "name": "Banana",
+      "category": "fruit",
+      "price": "1",
+      "imageUrl": "https://images.unsplash.com/photo-1528825871115-3581a5387919?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 16
+    },
+    {
+      "name": "White beans",
+      "category": "pulses and beans",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1515347272087-685ce5a1fc8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 17
+    },
+    {
+      "name": "Tomato",
+      "category": "vegetables",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1558818498-28c1e002b655?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 18
+    },
+    {
+      "name": "Cauliflower",
+      "category": "vegetables",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1510627498534-cf7e9002facc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+      "id": 19
+    },
+    {
+      "name": "Strawberry",
+      "category": "fruits",
+      "price": "4",
+      "imageUrl": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 20
+    },
+    {
+      "name": "Orange",
+      "category": "fruits",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1577041249022-26cc744ddda3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80",
+      "id": 21
+    },
+    {
+      "name": "Baked bun",
+      "category": "bread",
+      "price": "1",
+      "imageUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "id": 22
+    },
+    {
+      "name": "Berries",
+      "category": "fruits",
+      "price": "2",
+      "imageUrl": "https://images.unsplash.com/photo-1425934398893-310a009a77f9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80",
+      "id": 24
+    }
+  ],
+  "cart": [
+    {
+      "id": 4,
+      "quantity": 2,
+      "name": "Multigrain bread",
+      "price": "5",
+      "imageUrl": "https://images.unsplash.com/photo-1572214649933-125dae38a8d8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 3,
+      "quantity": 1,
+      "name": "Whole wheat bread",
+      "imageUrl": "https://images.pexels.com/photos/1586947/pexels-photo-1586947.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "price": "2"
+    },
+    {
+      "id": 5,
+      "quantity": 2,
+      "name": "Kidney beans",
+      "imageUrl": "https://images.unsplash.com/photo-1564894809611-1742fc40ed80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "price": "2"
+    },
+    {
+      "id": 14,
+      "quantity": 2,
+      "name": "Avocado",
+      "imageUrl": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      "price": "3"
+    }
+  ],
+  "users": [
+    {
+      "email": "walid.bouguima@gmail.com",
+      "password": "walid20889650",
+      "id": 1
+    }
+  ],
+  "login": [
+    {
+      "email": "walid.bouguima@gmail.com",
+      "password": "walid20889650",
+      "id": 1
+    }
+  ]
+}

@@ -10,8 +10,8 @@
 </form>
 <div class="container">
   <div class="items"
-    *ngFor="let product of products | paginate: { itemsPerPage: 7, currentPage: product };let i=index;">
-    <img [attr.alt]="product.name" mat-card-image [src]="product.imageUrl[0]">
+    *ngFor="let product of products | paginate: { itemsPerPage: 9, currentPage: product };let i=index;">
+    <img [attr.alt]="product.name" mat-card-image [src]="product.imageUrl">
     <p>{{product.name}}</p>
     <p>{{product.price | currency}}</p>
     <div *ngIf="addToCart === i">

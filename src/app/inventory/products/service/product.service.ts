@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
+import { baseUrl } from 'src/app/common/baseUrl'
 
 import { product } from '../interfaces/products.interfaces'
 
@@ -7,7 +8,7 @@ import { product } from '../interfaces/products.interfaces'
   providedIn: 'root',
 })
 export class ProductService {
-  rootUrl = 'http://localhost:3000/product'
+  rootUrl = `${baseUrl}products`
   constructor(private http: HttpClient) {}
 
   // tslint:disable-next-line: typedef

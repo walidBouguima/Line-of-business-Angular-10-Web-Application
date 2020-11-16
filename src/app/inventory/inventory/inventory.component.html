@@ -7,5 +7,10 @@
     routerLinkActive="active-link">Products</a>
   <a mat-button routerLink="/inventory/categories"
     routerLinkActive="active-link">Categories</a>
+  <span class="flex-spacer"></span>
+  <button aria-label="Cart" mat-icon-button>
+    <mat-icon matBadgeColor="accent" matBadgePosition="before">shopping_cart</mat-icon>
+  </button>
+
 </mat-toolbar>
 <router-outlet></router-outlet>
