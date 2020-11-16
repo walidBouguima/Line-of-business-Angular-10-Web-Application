@@ -13,3 +13,8 @@ export interface cartData {
   price: number
   imageUrl: string
 }
+export interface shippingAdd {
+  name: string
+  address: string
+  phone: number
+}
