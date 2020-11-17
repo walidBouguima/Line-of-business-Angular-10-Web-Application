@@ -6,7 +6,7 @@ import { AuthService, IAuthStatus } from 'src/app/auth/auth.service'
 import { SubSink } from 'subsink'
 
 import { cartData, product } from './interfaces/products.interfaces'
-import { CartService } from './service/Cart.service'
+import { CartService } from './service/cart.service'
 import { ProductService } from './service/product.service'
 
 @Component({

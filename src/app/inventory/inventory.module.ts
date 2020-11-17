@@ -9,7 +9,8 @@ import { InventoryHomeComponent } from './inventory-home/inventory-home.componen
 import { InventoryRoutingModule } from './inventory-routing.module'
 import { InventoryComponent } from './inventory/inventory.component'
 import { ProductsComponent } from './products/products.component'
-import { StockEntryComponent } from './stock-entry/stock-entry.component'
+import { StockEntryComponent } from './stock-entry/stock-entry.component';
+import { CartComponent } from './cart/cart.component'
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { StockEntryComponent } from './stock-entry/stock-entry.component'
     StockEntryComponent,
     ProductsComponent,
     CategoriesComponent,
+    CartComponent,
   ],
   imports: [
     CommonModule,

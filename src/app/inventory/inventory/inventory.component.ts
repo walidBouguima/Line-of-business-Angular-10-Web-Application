@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { SubSink } from 'subsink'
+
+import { CartService } from '../products/service/cart.service'
 
 @Component({
   selector: 'app-inventory',
@@ -6,7 +9,16 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./inventory.component.css'],
 })
 export class InventoryComponent implements OnInit {
-  constructor() {}
+  nuOfCartItems!: number
+  subs = new SubSink()
 
-  ngOnInit(): void {}
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.subs.add(
+      this.cartService.nuOfCartItems$.subscribe((res) => {
+        this.nuOfCartItems = res
+      })
+    )
+  }
 }

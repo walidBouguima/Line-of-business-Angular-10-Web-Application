@@ -1,0 +1,33 @@
+th {
+  text-align: left;
+}
+.empty {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 2rem;
+}
+.total {
+  text-align: end;
+  font-weight: bold;
+  margin-right: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.24);
+  margin-top: 1rem;
+}
+.checkout-container {
+  display: flex;
+  justify-content: center;
+}
+.checkout {
+  background: black;
+  color: white;
+  padding: 0.7rem 0.8rem;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 6rem;
+}
+.btn {
+  background-color: black;
+  color: white;
+  padding: 0.7rem 0.8rem;
+}

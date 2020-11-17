@@ -10,7 +10,6 @@ import { cartData, shippingAdd } from '../interfaces/products.interfaces'
 })
 export class CartService {
   nuOfCartItems$ = new Subject<number>()
-  isCheckedOut$ = new Subject<boolean>()
   isPlacedOrder$ = new Subject<boolean>()
   orderPlaced$ = new ReplaySubject<shippingAdd>()
 

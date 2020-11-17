@@ -1,0 +1,33 @@
+<table *ngIf="cartProducts.length !==0" style="width:100%;margin-top: 2rem;">
+  <tr>
+    <th>Product Name</th>
+    <th>Image</th>
+    <th>Quantity</th>
+    <th>Update</th>
+    <th>Delete</th>
+    <th>Price</th>
+  </tr>
+  <tr *ngFor="let product of cartProducts;let i=index;">
+    <td>{{product.name}}</td>
+    <td><img style="width:200px;height: 200px;" [src]="product.imageUrl" alt=""></td>
+    <td>
+      <form #f="ngForm">
+        <input name="quantity" type="number" [(ngModel)]="product.quantity" min="1">
+      </form>
+
+    </td>
+    <td><button style="cursor: pointer;" class="btn"
+        (click)="onUpdateCart(product.quantity,i)">Update</button></td>
+    <td><button style="cursor: pointer;" class="btn"
+        (click)="onDeleteCart(product)">Delete</button></td>
+    <td> {{ product.quantity * product.price | currency}}</td>
+
+  </tr>
+
+</table>
+<div class="total" *ngIf="cartProducts.length !==0">
+  Total Price:{{totalPrice | currency}}
+</div>
+<div class="empty" *ngIf="cartProducts.length === 0">
+  Your cart is empty
+</div>
